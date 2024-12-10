@@ -1,0 +1,16 @@
+languages:
+  - en
+
+exclude:
+  - Build
+  - Package.swift
+
+rules:
+  - support_flat_case
+  - support_one_line_comment
+  - support_multi_line_comment
+  - ignore_swift_keywords
+  - ignore_commonly_used_words
+
+ignore:
+  - veo
