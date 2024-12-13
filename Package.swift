@@ -20,7 +20,7 @@ let package = Package(
         .target(
             name: "VeoUI",
             resources: [
-                .process("Resources/Fonts")
+                .process("Resources")
             ]),
         .testTarget(
             name: "VeoUITests",

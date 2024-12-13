@@ -11,6 +11,7 @@ public struct VeoIcon: View {
     enum IconType {
         case system(String)
         case custom(String)
+        case common(CommonIcons)
     }
 
     let icon: IconType
@@ -21,7 +22,7 @@ public struct VeoIcon: View {
     var isEnabled = true
     var background: Color? = nil
     var backgroundOpacity = 0.1
-    var padding: CGFloat = 8
+    var padding: CGFloat = 4
 
     private var iconImage: Image {
         switch icon {
@@ -29,6 +30,8 @@ public struct VeoIcon: View {
             return Image(systemName: name)
         case let .custom(name):
             return Image(name)
+        case let .common(common):
+            return Image(systemName: common.rawValue)
         }
     }
 
@@ -55,6 +58,8 @@ extension VeoIcon {
         case back = "chevron.left"
         case forward = "chevron.right"
         case menu = "line.3.horizontal"
+        case bell
+        case logout = "rectangle.portrait.and.arrow.right"
 
         case add = "plus"
         case delete = "trash"

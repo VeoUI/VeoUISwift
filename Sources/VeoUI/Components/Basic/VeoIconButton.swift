@@ -55,6 +55,7 @@ public struct VeoIconButton: View {
             .padding(.vertical, style.verticalPadding)
             .background(style.backgroundColor)
             .cornerRadius(style.cornerRadius)
+            .environment(\.layoutDirection, VeoUI.isRTL ? .rightToLeft : .leftToRight)
         }
     }
 }
