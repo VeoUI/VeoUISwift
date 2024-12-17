@@ -2,14 +2,14 @@ import SwiftUI
 
 @MainActor
 public class VeoUI {
-    static var primaryColor: Color = .orange
-    static var primaryDarkColor: Color = .red
+    static var primaryColor: Color = .init(hex: "#1abc9c")
+    static var primaryDarkColor: Color = .init(hex: "#16a085")
     static var secondaryColor: Color?
     static var tertiaryColor: Color?
-    static var successColor: Color?
-    static var infoColor: Color?
-    static var warningColor: Color?
-    static var dangerColor: Color = .red
+    static var successColor: Color = .init(hex: "#2ecc71")
+    static var infoColor: Color = .init(hex: "#3498db")
+    static var warningColor: Color = .init(hex: "#f1c40f")
+    static var dangerColor: Color = .init(hex: "#e74c3c")
     static var isDarkMode = false
     static var mainFont = "SFUI-Medium"
     static var lightFont: String?
