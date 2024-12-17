@@ -45,9 +45,9 @@ public struct VeoButton: View {
         case .secondary:
             VeoUI.secondaryColor ?? .white
         case .info:
-            VeoUI.infoColor ?? .white
+            VeoUI.infoColor
         case .warning:
-            VeoUI.warningColor ?? .white
+            VeoUI.warningColor
         case .danger:
             VeoUI.dangerColor
         case .tertiary:
@@ -106,7 +106,7 @@ public struct VeoButton: View {
     }
 }
 
-enum VeoButtonStyle {
+public enum VeoButtonStyle {
     case primary
     case secondary
     case info
@@ -115,7 +115,7 @@ enum VeoButtonStyle {
     case tertiary
 }
 
-enum VeoButtonShape {
+public enum VeoButtonShape {
     case square
     case rounded
     case circle

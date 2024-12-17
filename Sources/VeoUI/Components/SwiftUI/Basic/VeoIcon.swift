@@ -23,6 +23,7 @@ public struct VeoIcon: View {
     var background: Color? = nil
     var backgroundOpacity = 0.1
     var padding: CGFloat = 4
+    var action: (() -> Void)? = nil
 
     private var iconImage: Image {
         switch icon {
@@ -49,6 +50,9 @@ public struct VeoIcon: View {
                     }
                 })
             .opacity(isEnabled ? 1 : 0.5)
+            .onTapGesture {
+                self.action?()
+            }
     }
 }
 

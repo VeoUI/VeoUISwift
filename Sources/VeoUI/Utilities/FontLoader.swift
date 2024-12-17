@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public class FontLoader {
+internal class FontLoader {
     public static func loadFonts() {
         let fontNames = [
             "Rubik-Regular.ttf",
