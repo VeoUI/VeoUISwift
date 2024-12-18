@@ -16,10 +16,8 @@ public struct VeoAppBar: View {
                 VeoIcon(
                     icon: .common(.menu),
                     color: .white,
-                    action: {
-                        
-                    })
-                
+                    action: {})
+
                 VeoText(appName, style: .title, color: .white)
 
                 Spacer()
@@ -48,7 +46,7 @@ public struct VeoAppBar: View {
         mainFont: "Rubik-Bold")
 
     struct VeoAppBarPreview: View {
-        
+        @State private var selectedIndex = 0
         @State private var isSidebarShowing = false
         @State private var showLogoutAlert = false
         @State private var selectedMenuItem: VeoSidebar.VeoSidebarItem?
@@ -78,7 +76,7 @@ public struct VeoAppBar: View {
             backgroundColor: VeoUI.primaryColor,
             selectedColor: VeoUI.dangerColor,
             textColor: .white)
-        
+
         let posts: [VeoPost.PostData] = [
             .init(
                 userAvatar: "photo1",
@@ -118,11 +116,21 @@ public struct VeoAppBar: View {
                 comments: 8)
         ]
 
+        let items: [VeoBottomTabBar.TabItem] = [
+            .init(
+                icon: "house.fill",
+                title: "الرئيسية"),
+            .init(icon: "magnifyingglass", title: "البحث"),
+            .init(icon: "plus.circle.fill", title: "جديد"),
+            .init(icon: "bell.fill", title: "الإشعارات"),
+            .init(icon: "person.fill", title: "حسابي")
+        ]
+
         var body: some View {
             ZStack {
                 VStack(spacing: 0) {
                     VeoAppBar(appName: "تدويناتي")
-                    
+
                     VeoIconButton(
                         icon: "plus.circle",
                         title: "إضافة تدوينة")
@@ -132,7 +140,7 @@ public struct VeoAppBar: View {
                             isSidebarShowing.toggle()
                         }
                     }.padding()
-                    
+
                     ScrollView {
                         VStack(spacing: 16) {
                             ForEach(posts, id: \.id) { post in
@@ -151,7 +159,6 @@ public struct VeoAppBar: View {
                     .scrollIndicators(.hidden)
                     .clipShape(RoundedCorner(radius: 32, corners: [.topLeft, .topRight]))
                 }
-                .ignoresSafeArea(.container, edges: .bottom)
                 .background(
                     LinearGradient(
                         colors: [
@@ -160,8 +167,12 @@ public struct VeoAppBar: View {
                         ],
                         startPoint: .top,
                         endPoint: .bottom))
-               
-                
+
+                VStack {
+                    Spacer()
+                    VeoBottomTabBar(selectedIndex: $selectedIndex, items: items)
+                }
+
                 if isSidebarShowing {
                     Color.black
                         .opacity(0.3)
@@ -178,15 +189,40 @@ public struct VeoAppBar: View {
                     menuItems: menuItems,
                     selectedItem: $selectedMenuItem,
                     isShowing: $isSidebarShowing)
-            }.environment(\.layoutDirection, VeoUI.isRTL ? .rightToLeft : .leftToRight)
-                .alert("تسجيل الخروج", isPresented: $showLogoutAlert) {
-                    Button("إلغاء", role: .cancel) {}
-                    Button("تأكيد", role: .destructive) {
-                        isSidebarShowing = false
-                    }
-                } message: {
-                    Text("هل أنت متأكد من تسجيل الخروج؟")
+
+                if showLogoutAlert {
+                    VeoAlert(
+                        isPresented: $showLogoutAlert,
+                        content: VeoAlert.AlertContent(
+                            icon: .system(
+                                name: "checkmark",
+                                color: .green,
+                                backgroundColor: Color.green.opacity(0.1)),
+                            title: "تسجيل الخروج",
+                            message: "هل أنت متأكد من تسجيل الخروج؟",
+                            primaryButton: VeoAlert.AlertButton(
+                                title: "تأكيد",
+                                style: .init(
+                                    backgroundColor: .green,
+                                    foregroundColor: .white,
+                                    font: .system(size: 16, weight: .bold),
+                                    cornerRadius: 25,
+                                    padding: EdgeInsets(top: 12, leading: 32, bottom: 12, trailing: 32)), action: {
+                                    showLogoutAlert = false
+                                    isSidebarShowing = false
+                                }),
+                            secondaryButton: VeoAlert.AlertButton(
+                                title: "إلغاء",
+                                style: .init(
+                                    backgroundColor: .green,
+                                    foregroundColor: .white,
+                                    font: .system(size: 16, weight: .bold),
+                                    cornerRadius: 25,
+                                    padding: EdgeInsets(top: 12, leading: 32, bottom: 12, trailing: 32)), action: {})))
                 }
+
+            }.ignoresSafeArea(.container, edges: .bottom)
+                .environment(\.layoutDirection, VeoUI.isRTL ? .rightToLeft : .leftToRight)
         }
     }
 

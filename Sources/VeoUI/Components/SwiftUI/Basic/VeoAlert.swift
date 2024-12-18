@@ -119,6 +119,8 @@ public struct VeoAlert: View {
     }
 
     @Binding private var isPresented: Bool
+    @State private var opacity: Double = 0
+    @State private var scale: CGFloat = 0.8
     private let content: AlertContent
     private let style: AlertStyle
 
@@ -136,10 +138,9 @@ public struct VeoAlert: View {
         ZStack {
             style.backdropColor
                 .ignoresSafeArea()
+                .opacity(opacity)
                 .onTapGesture {
-                    withAnimation {
-                        isPresented = false
-                    }
+                    hideAlert()
                 }
 
             VStack(spacing: style.spacing) {
@@ -164,7 +165,12 @@ public struct VeoAlert: View {
 
                 HStack(spacing: 16) {
                     if let secondaryButton = content.secondaryButton {
-                        Button(action: secondaryButton.action) {
+                        Button(action: {
+                            hideAlert()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                secondaryButton.action()
+                            }
+                        }) {
                             Text(secondaryButton.title)
                                 .font(secondaryButton.style.font)
                                 .foregroundColor(secondaryButton.style.foregroundColor)
@@ -174,7 +180,12 @@ public struct VeoAlert: View {
                         }
                     }
 
-                    Button(action: content.primaryButton.action) {
+                    Button(action: {
+                        hideAlert()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            content.primaryButton.action()
+                        }
+                    }) {
                         Text(content.primaryButton.title)
                             .font(content.primaryButton.style.font)
                             .foregroundColor(content.primaryButton.style.foregroundColor)
@@ -191,9 +202,31 @@ public struct VeoAlert: View {
                     .shadow(color: .black.opacity(0.2), radius: 10, y: 2))
             .padding(.horizontal, 24)
             .frame(maxWidth: UIScreen.main.bounds.width - 48)
+            .scaleEffect(scale)
+            .opacity(opacity)
         }
         .transition(.opacity.combined(with: .scale))
         .zIndex(999)
+        .onAppear {
+            showAlert()
+        }
+    }
+
+    private func showAlert() {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+            opacity = 1
+            scale = 1
+        }
+    }
+
+    private func hideAlert() {
+        withAnimation(.easeOut(duration: 0.2)) {
+            opacity = 0
+            scale = 0.8
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            isPresented = false
+        }
     }
 }
 

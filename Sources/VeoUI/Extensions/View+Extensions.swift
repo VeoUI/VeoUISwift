@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public extension View {
-    func aspectRatio(_ ratio: CGFloat) -> some View {
+extension View {
+    public func aspectRatio(_ ratio: CGFloat) -> some View {
         modifier(AspectRatio(ratio: ratio))
     }
 }

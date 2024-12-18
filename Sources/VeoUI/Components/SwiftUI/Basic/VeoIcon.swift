@@ -51,7 +51,7 @@ public struct VeoIcon: View {
                 })
             .opacity(isEnabled ? 1 : 0.5)
             .onTapGesture {
-                self.action?()
+                action?()
             }
     }
 }
