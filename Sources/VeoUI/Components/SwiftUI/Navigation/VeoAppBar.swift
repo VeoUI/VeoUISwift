@@ -9,9 +9,20 @@ import SwiftUI
 
 public struct VeoAppBar: View {
     var appName: String
+    var onMenuTap: () -> Void
+    var onNotificationTap: () -> Void
+    var onLogoutTap: () -> Void
     
-    public init(appName: String) {
+    public init(
+        appName: String,
+        onMenuTap: @escaping () -> Void,
+        onNotificationTap: @escaping () -> Void,
+        onLogoutTap: @escaping () -> Void
+    ) {
         self.appName = appName
+        self.onMenuTap = onMenuTap
+        self.onNotificationTap = onNotificationTap
+        self.onLogoutTap = onLogoutTap
     }
 
     public var body: some View {
@@ -20,7 +31,7 @@ public struct VeoAppBar: View {
                 VeoIcon(
                     icon: .common(.menu),
                     color: .white,
-                    action: {})
+                    action: onMenuTap)
 
                 VeoText(appName, style: .title, color: .white)
 
@@ -28,11 +39,13 @@ public struct VeoAppBar: View {
 
                 VeoIcon(
                     icon: .common(.bell),
-                    color: .white)
+                    color: .white,
+                    action: onNotificationTap)
 
                 VeoIcon(
                     icon: .common(.logout),
-                    color: .white)
+                    color: .white,
+                    action: onLogoutTap)
             }
             .padding(16)
             .environment(\.layoutDirection, VeoUI.isRTL ? .rightToLeft : .leftToRight)
@@ -133,7 +146,20 @@ public struct VeoAppBar: View {
         var body: some View {
             ZStack {
                 VStack(spacing: 0) {
-                    VeoAppBar(appName: "تدويناتي")
+                    VeoAppBar(
+                        appName: "تدويناتي",
+                        onMenuTap: {
+                            withAnimation(.spring(response: 0.3)) {
+                                isSidebarShowing.toggle()
+                            }
+                        },
+                        onNotificationTap: {
+                            selectedIndex = 3
+                        },
+                        onLogoutTap: {
+                            showLogoutAlert = true
+                        }
+                    )
 
                     VeoIconButton(
                         icon: "plus.circle",
