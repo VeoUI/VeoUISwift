@@ -42,6 +42,7 @@ public struct VeoOnboarding: View {
     private let showSkipButton: Bool
     private let showNextButton: Bool
     private let buttonAlignment: ButtonAlignment
+    private let onFinish: () -> Void
 
     @State private var currentPage = 0
     @State private var shouldFinish = false
@@ -77,7 +78,8 @@ public struct VeoOnboarding: View {
         getStartedButtonText: String = "Get Started",
         showSkipButton: Bool = true,
         showNextButton: Bool = true,
-        buttonAlignment: ButtonAlignment = .bottom)
+        buttonAlignment: ButtonAlignment = .bottom,
+        onFinish: @escaping () -> Void = {})
     {
         self.items = items
         self.titleFontSize = titleFontSize
@@ -89,6 +91,7 @@ public struct VeoOnboarding: View {
         self.showSkipButton = showSkipButton
         self.showNextButton = showNextButton
         self.buttonAlignment = buttonAlignment
+        self.onFinish = onFinish
     }
 
     public var body: some View {
@@ -132,6 +135,7 @@ public struct VeoOnboarding: View {
         .onChange(of: shouldFinish) { finished in
             if finished {
                 onboardingCompletion?()
+                onFinish()
             }
         }
         .environment(\.layoutDirection, VeoUI.isRTL ? .rightToLeft : .leftToRight)
@@ -237,7 +241,10 @@ extension View {
                 items: items,
                 skipButtonText: "تخطي",
                 nextButtonText: "التالي",
-                getStartedButtonText: "ابدأ الآن")
+                getStartedButtonText: "ابدأ الآن",
+                onFinish: {
+                    print("Onboarding completed!")
+                })
         }
     }
 
