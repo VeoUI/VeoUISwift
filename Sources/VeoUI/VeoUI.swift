@@ -2,24 +2,24 @@ import SwiftUI
 
 @MainActor
 public class VeoUI {
-    static var primaryColor: Color = .init(hex: "#1abc9c")
-    static var primaryDarkColor: Color = .init(hex: "#16a085")
-    static var secondaryColor: Color?
-    static var tertiaryColor: Color?
-    static var successColor: Color = .init(hex: "#2ecc71")
-    static var infoColor: Color = .init(hex: "#3498db")
-    static var warningColor: Color = .init(hex: "#f1c40f")
-    static var dangerColor: Color = .init(hex: "#e74c3c")
-    static var isDarkMode = false
-    static var mainFont = "SFUI-Medium"
-    static var lightFont: String?
-    static var regularFont: String?
-    static var mediumFont: String?
-    static var boldFont: String?
-    static var italicFont: String?
-    static var defaultCornerRadius: CGFloat = 24
-    static var defaultElevation: CGFloat = 2
-    static var isRTL = false
+    public static var primaryColor: Color = .init(hex: "#1abc9c")
+    public static var primaryDarkColor: Color = .init(hex: "#16a085")
+    public static var secondaryColor: Color?
+    public static var tertiaryColor: Color?
+    public static var successColor: Color = .init(hex: "#2ecc71")
+    public static var infoColor: Color = .init(hex: "#3498db")
+    public static var warningColor: Color = .init(hex: "#f1c40f")
+    public static var dangerColor: Color = .init(hex: "#e74c3c")
+    public static var isDarkMode = false
+    public static var mainFont = "SFUI-Medium"
+    public static var lightFont: String?
+    public static var regularFont: String?
+    public static var mediumFont: String?
+    public static var boldFont: String?
+    public static var italicFont: String?
+    public static var defaultCornerRadius: CGFloat = 24
+    public static var defaultElevation: CGFloat = 2
+    public static var isRTL = false
 
     public static func configure(
         primaryColor: Color? = nil,

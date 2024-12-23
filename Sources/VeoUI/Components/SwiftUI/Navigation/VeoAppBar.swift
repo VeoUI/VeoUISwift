@@ -9,6 +9,10 @@ import SwiftUI
 
 public struct VeoAppBar: View {
     var appName: String
+    
+    public init(appName: String) {
+        self.appName = appName
+    }
 
     public var body: some View {
         ZStack {

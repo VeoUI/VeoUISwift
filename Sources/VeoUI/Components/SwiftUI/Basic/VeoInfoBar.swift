@@ -24,6 +24,17 @@ public struct VeoInfoBar: View {
         let padding: EdgeInsets
         let font: Font
         let actionFont: Font
+        
+        public init(backgroundColor: Color, textColor: Color, actionTextColor: Color, iconColor: Color, cornerRadius: CGFloat, padding: EdgeInsets, font: Font, actionFont: Font) {
+            self.backgroundColor = backgroundColor
+            self.textColor = textColor
+            self.actionTextColor = actionTextColor
+            self.iconColor = iconColor
+            self.cornerRadius = cornerRadius
+            self.padding = padding
+            self.font = font
+            self.actionFont = actionFont
+        }
 
         public static let standard = InfoBarStyle(
             backgroundColor: .white.opacity(0.1),

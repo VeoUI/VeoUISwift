@@ -19,6 +19,14 @@ public struct VeoInfoBanner: View {
         let cornerRadius: CGFloat
         let font: Font
         let padding: EdgeInsets
+        
+        public init(backgroundColor: Color, foregroundColor: Color, cornerRadius: CGFloat, font: Font, padding: EdgeInsets) {
+            self.backgroundColor = backgroundColor
+            self.foregroundColor = foregroundColor
+            self.cornerRadius = cornerRadius
+            self.font = font
+            self.padding = padding
+        }
 
         public static let standard = BannerStyle(
             backgroundColor: .blue.opacity(0.4),

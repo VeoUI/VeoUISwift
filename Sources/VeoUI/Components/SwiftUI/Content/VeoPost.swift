@@ -8,8 +8,8 @@
 import SwiftUI
 
 public struct VeoPost: View {
-    public struct PostData {
-        let id = UUID()
+    public struct PostData: Identifiable {
+        public let id = UUID()
         let userAvatar: String
         let userName: String
         let badgeContent: String?
@@ -52,6 +52,19 @@ public struct VeoPost: View {
         let actionButtonColor: Color
         let padding: EdgeInsets
         let font: PostFontConfig
+        
+        public init(backgroundColor: Color, cornerRadius: CGFloat, shadowColor: Color, shadowRadius: CGFloat, badgeColor: Color, primaryTextColor: Color, secondaryTextColor: Color, actionButtonColor: Color, padding: EdgeInsets, font: PostFontConfig) {
+            self.backgroundColor = backgroundColor
+            self.cornerRadius = cornerRadius
+            self.shadowColor = shadowColor
+            self.shadowRadius = shadowRadius
+            self.badgeColor = badgeColor
+            self.primaryTextColor = primaryTextColor
+            self.secondaryTextColor = secondaryTextColor
+            self.actionButtonColor = actionButtonColor
+            self.padding = padding
+            self.font = font
+        }
 
         @MainActor
         public struct PostFontConfig {
@@ -63,6 +76,17 @@ public struct VeoPost: View {
             let content: Font
             let stats: Font
             let actionButton: Font
+            
+            public init(userName: Font, newUserBadge: Font, location: Font, rating: Font, date: Font, content: Font, stats: Font, actionButton: Font) {
+                self.userName = userName
+                self.newUserBadge = newUserBadge
+                self.location = location
+                self.rating = rating
+                self.date = date
+                self.content = content
+                self.stats = stats
+                self.actionButton = actionButton
+            }
 
             public static let standard = PostFontConfig(
                 userName: .system(size: 16, weight: .bold),

@@ -27,7 +27,7 @@ public struct VeoSplash: View {
     let screenDuration: Double
     let spacing: CGFloat
 
-    init(
+    public init(
         title: String,
         backgroundGradient: [Color] = [
             VeoUI.primaryColor,

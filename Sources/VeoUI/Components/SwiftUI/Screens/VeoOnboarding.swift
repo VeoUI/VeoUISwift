@@ -8,20 +8,26 @@
 import SwiftUI
 
 public struct VeoOnboarding: View {
-    struct OnboardingItem: Identifiable {
-        let id = UUID()
+    public struct OnboardingItem: Identifiable {
+        public let id = UUID()
         let title: String
         let description: String
         let image: String
+        
+        public init(title: String, description: String, image: String) {
+            self.title = title
+            self.description = description
+            self.image = image
+        }
     }
 
-    enum NavigationStyle {
+    public enum NavigationStyle {
         case swipe
         case button
         case both
     }
 
-    enum ButtonAlignment {
+    public enum ButtonAlignment {
         case bottom
         case bottomTrailing
     }
@@ -61,7 +67,7 @@ public struct VeoOnboarding: View {
         skipButtonText
     }
 
-    init(
+    public init(
         items: [OnboardingItem],
         titleFontSize: CGFloat = 28,
         descriptionFontSize: CGFloat = 20,

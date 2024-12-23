@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct VeoIcon: View {
-    enum IconType {
+    public enum IconType {
         case system(String)
         case custom(String)
         case common(CommonIcons)
@@ -24,7 +24,31 @@ public struct VeoIcon: View {
     var backgroundOpacity = 0.1
     var padding: CGFloat = 4
     var action: (() -> Void)? = nil
-
+    
+    public init(
+        icon: IconType,
+        size: CGFloat = 24,
+        color: Color = .primary,
+        weight: Font.Weight = .regular,
+        renderingMode: Image.TemplateRenderingMode = .template,
+        isEnabled: Bool = true,
+        background: Color? = nil,
+        backgroundOpacity: Double = 0.1,
+        padding: CGFloat = 4,
+        action: (() -> Void)? = nil
+    ) {
+        self.icon = icon
+        self.size = size
+        self.color = color
+        self.weight = weight
+        self.renderingMode = renderingMode
+        self.isEnabled = isEnabled
+        self.background = background
+        self.backgroundOpacity = backgroundOpacity
+        self.padding = padding
+        self.action = action
+    }
+    
     private var iconImage: Image {
         switch icon {
         case let .system(name):
@@ -57,7 +81,7 @@ public struct VeoIcon: View {
 }
 
 extension VeoIcon {
-    enum CommonIcons: String {
+    public enum CommonIcons: String {
         case home = "house.fill"
         case back = "chevron.left"
         case forward = "chevron.right"
