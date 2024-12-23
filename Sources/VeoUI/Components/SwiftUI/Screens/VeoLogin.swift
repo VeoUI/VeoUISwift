@@ -25,6 +25,12 @@ public struct VeoLogin: View {
     var forgotPasswordButtonTitle = "Forgot Password ?"
     var dontHaveAccountButtonTitle = "Don't have an account? Register Now !"
 
+    var onLoginTapped: ((_ email: String, _ password: String) async throws -> Void)?
+    var onRegisterTapped: (() -> Void)?
+    var onForgotPasswordTapped: (() -> Void)?
+    var onLoginSuccess: (() -> Void)?
+    var onLoginError: ((Error) -> Void)?
+
     public init(
         appName: String,
         appIcon: VeoIcon? = nil,
@@ -34,7 +40,12 @@ public struct VeoLogin: View {
         passwordPlaceholder: String,
         loginButtonTitle: String,
         forgotPasswordButtonTitle: String,
-        dontHaveAccountButtonTitle: String)
+        dontHaveAccountButtonTitle: String,
+        onLoginTapped: ((_ email: String, _ password: String) async throws -> Void)? = nil,
+        onRegisterTapped: (() -> Void)? = nil,
+        onForgotPasswordTapped: (() -> Void)? = nil,
+        onLoginSuccess: (() -> Void)? = nil,
+        onLoginError: ((Error) -> Void)? = nil)
     {
         self.appName = appName
         self.appIcon = appIcon
@@ -45,87 +56,109 @@ public struct VeoLogin: View {
         self.loginButtonTitle = loginButtonTitle
         self.forgotPasswordButtonTitle = forgotPasswordButtonTitle
         self.dontHaveAccountButtonTitle = dontHaveAccountButtonTitle
+        self.onLoginTapped = onLoginTapped
+        self.onRegisterTapped = onRegisterTapped
+        self.onForgotPasswordTapped = onForgotPasswordTapped
+        self.onLoginSuccess = onLoginSuccess
+        self.onLoginError = onLoginError
     }
 
     public var body: some View {
-        NavigationStack {
-            ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        VeoUI.primaryColor,
-                        VeoUI.primaryDarkColor
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom)
-                    .ignoresSafeArea()
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    VeoUI.primaryColor,
+                    VeoUI.primaryDarkColor
+                ]),
+                startPoint: .top,
+                endPoint: .bottom)
+                .ignoresSafeArea()
+
+            VStack(spacing: 20) {
+                if let appIcon = appIcon {
+                    appIcon
+                }
+
+                if let appLogo = appLogo {
+                    appLogo
+                }
+
+                VeoText(appName, style: .title, color: .white)
+
+                VeoText(title, style: .subtitle, color: .white)
+                    .padding(.top, 20)
 
                 VStack(spacing: 20) {
-                    if let appIcon = appIcon {
-                        appIcon
+                    VeoTextField(
+                        text: $email,
+                        icon: "envelope",
+                        placeholder: emailPlaceholder)
+
+                    VeoTextField(
+                        text: $password,
+                        icon: "lock",
+                        placeholder: passwordPlaceholder,
+                        isSecure: true)
+
+                    HStack {
+                        Spacer()
+                        Button(action: handleForgotPassword) {
+                            VeoText(forgotPasswordButtonTitle, style: .subtitle, color: .white)
+                        }
                     }
+                    .padding(.top, -10)
 
-                    VeoText(appName, style: .title, color: .white)
-
-                    VeoText(title, style: .subtitle, color: .white)
-                        .padding(.top, 20)
-
-                    VStack(spacing: 20) {
-                        VeoTextField(
-                            text: $email,
-                            icon: "envelope",
-                            placeholder: emailPlaceholder)
-
-                        VeoTextField(
-                            text: $password,
-                            icon: "lock",
-                            placeholder: passwordPlaceholder,
-                            isSecure: true)
-
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                showForgotPassword = true
-                            }) {
-                                VeoText(forgotPasswordButtonTitle, style: .subtitle, color: .white)
-                            }
-                        }
-                        .padding(.top, -10)
-
-                        VeoButton(title: loginButtonTitle, action: {
-                            withAnimation {
-                                isLoading = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    isLoading = false
-                                    showHome = true
-                                }
-                            }
-                        }).disabled(isLoading)
-
-                        Button(action: {
-                            showRegister = true
-                        }) {
-                            VeoText(
-                                dontHaveAccountButtonTitle,
-                                style: .subtitle,
-                                color: .white.opacity(0.7))
-                        }
+                    VeoButton(title: loginButtonTitle, action: handleLogin)
                         .disabled(isLoading)
-                    }
-                    .padding(.top, 20)
-                }
-                .padding(20)
 
-                if isLoading {
-                    VeoLoader()
+                    Button(action: handleRegister) {
+                        VeoText(
+                            dontHaveAccountButtonTitle,
+                            style: .subtitle,
+                            color: .white.opacity(0.7))
+                    }
+                    .disabled(isLoading)
+                }
+                .padding(.top, 20)
+            }
+            .padding(20)
+
+            if isLoading {
+                VeoLoader()
+            }
+        }
+        .environment(\.layoutDirection, VeoUI.isRTL ? .rightToLeft : .leftToRight)
+    }
+
+    private func handleLogin() {
+        guard !email.isEmpty, !password.isEmpty else { return }
+
+        withAnimation {
+            isLoading = true
+        }
+
+        Task {
+            do {
+                try await onLoginTapped?(email, password)
+                await MainActor.run {
+                    isLoading = false
+                    onLoginSuccess?()
+                }
+            } catch {
+                await MainActor.run {
+                    isLoading = false
+                    onLoginError?(error)
                 }
             }
-            .navigationDestination(isPresented: $showRegister) {
-                // RegisterView()
-            }
-            .navigationDestination(isPresented: $showForgotPassword) {
-                // ForgotPasswordView()
-            }
-        }.environment(\.layoutDirection, VeoUI.isRTL ? .rightToLeft : .leftToRight)
+        }
+    }
+
+    private func handleRegister() {
+        onRegisterTapped?()
+    }
+
+    private func handleForgotPassword() {
+        onForgotPasswordTapped?()
     }
 }
 
@@ -151,7 +184,23 @@ public struct VeoLogin: View {
                 passwordPlaceholder: "كلمة المرور",
                 loginButtonTitle: "دخول",
                 forgotPasswordButtonTitle: "نسيت كلمة المرور ؟",
-                dontHaveAccountButtonTitle: "ليس لديك حساب ؟ أنشئه الآن")
+                dontHaveAccountButtonTitle: "ليس لديك حساب ؟ أنشئه الآن",
+                onLoginTapped: { email, password in
+                    print("Login tapped with email: \(email) and password: \(password)")
+                    try await Task.sleep(nanoseconds: 2_000_000_000)
+                },
+                onRegisterTapped: {
+                    print("Register tapped")
+                },
+                onForgotPasswordTapped: {
+                    print("Forgot password tapped")
+                },
+                onLoginSuccess: {
+                    print("Login successful")
+                },
+                onLoginError: { error in
+                    print("Login error: \(error.localizedDescription)")
+                })
         }
     }
 
