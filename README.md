@@ -11,9 +11,9 @@
 
 Add VeoUI to your project through Xcode:
 
-1. File > Swift Packages > Add Package Dependency
+1. File > Add Package Dependencies...
 2. Enter package URL: `https://github.com/VeoUI/VeoUISwift.git`
-3. Select the version you want to use
+3. Select the version you want to use (Latest version is recommended)
 
 Or add it to your `Package.swift`:
 

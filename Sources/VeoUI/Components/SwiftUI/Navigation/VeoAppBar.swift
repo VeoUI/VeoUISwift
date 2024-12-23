@@ -12,13 +12,13 @@ public struct VeoAppBar: View {
     var onMenuTap: () -> Void
     var onNotificationTap: () -> Void
     var onLogoutTap: () -> Void
-    
+
     public init(
         appName: String,
         onMenuTap: @escaping () -> Void,
         onNotificationTap: @escaping () -> Void,
-        onLogoutTap: @escaping () -> Void
-    ) {
+        onLogoutTap: @escaping () -> Void)
+    {
         self.appName = appName
         self.onMenuTap = onMenuTap
         self.onNotificationTap = onNotificationTap
@@ -158,8 +158,7 @@ public struct VeoAppBar: View {
                         },
                         onLogoutTap: {
                             showLogoutAlert = true
-                        }
-                    )
+                        })
 
                     VeoIconButton(
                         icon: "plus.circle",

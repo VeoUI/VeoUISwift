@@ -24,7 +24,7 @@ public struct VeoIcon: View {
     var backgroundOpacity = 0.1
     var padding: CGFloat = 4
     var action: (() -> Void)? = nil
-    
+
     public init(
         icon: IconType,
         size: CGFloat = 24,
@@ -35,8 +35,8 @@ public struct VeoIcon: View {
         background: Color? = nil,
         backgroundOpacity: Double = 0.1,
         padding: CGFloat = 4,
-        action: (() -> Void)? = nil
-    ) {
+        action: (() -> Void)? = nil)
+    {
         self.icon = icon
         self.size = size
         self.color = color
@@ -48,7 +48,7 @@ public struct VeoIcon: View {
         self.padding = padding
         self.action = action
     }
-    
+
     private var iconImage: Image {
         switch icon {
         case let .system(name):

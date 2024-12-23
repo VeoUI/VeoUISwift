@@ -52,8 +52,19 @@ public struct VeoPost: View {
         let actionButtonColor: Color
         let padding: EdgeInsets
         let font: PostFontConfig
-        
-        public init(backgroundColor: Color, cornerRadius: CGFloat, shadowColor: Color, shadowRadius: CGFloat, badgeColor: Color, primaryTextColor: Color, secondaryTextColor: Color, actionButtonColor: Color, padding: EdgeInsets, font: PostFontConfig) {
+
+        public init(
+            backgroundColor: Color,
+            cornerRadius: CGFloat,
+            shadowColor: Color,
+            shadowRadius: CGFloat,
+            badgeColor: Color,
+            primaryTextColor: Color,
+            secondaryTextColor: Color,
+            actionButtonColor: Color,
+            padding: EdgeInsets,
+            font: PostFontConfig)
+        {
             self.backgroundColor = backgroundColor
             self.cornerRadius = cornerRadius
             self.shadowColor = shadowColor
@@ -76,8 +87,17 @@ public struct VeoPost: View {
             let content: Font
             let stats: Font
             let actionButton: Font
-            
-            public init(userName: Font, newUserBadge: Font, location: Font, rating: Font, date: Font, content: Font, stats: Font, actionButton: Font) {
+
+            public init(
+                userName: Font,
+                newUserBadge: Font,
+                location: Font,
+                rating: Font,
+                date: Font,
+                content: Font,
+                stats: Font,
+                actionButton: Font)
+            {
                 self.userName = userName
                 self.newUserBadge = newUserBadge
                 self.location = location

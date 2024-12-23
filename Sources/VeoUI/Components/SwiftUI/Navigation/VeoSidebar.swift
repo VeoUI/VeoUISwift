@@ -13,17 +13,17 @@ public struct VeoSidebar: View {
     @Binding var selectedItem: VeoSidebarItem?
     @Binding var isShowing: Bool
     @State private var dragOffset: CGFloat = 0
-    
+
     public init(
         config: VeoSidebarConfig,
         menuItems: [VeoSidebarItem],
         selectedItem: Binding<VeoSidebarItem?>,
-        isShowing: Binding<Bool>
-    ) {
+        isShowing: Binding<Bool>)
+    {
         self.config = config
         self.menuItems = menuItems
-        self._selectedItem = selectedItem
-        self._isShowing = isShowing
+        _selectedItem = selectedItem
+        _isShowing = isShowing
     }
 
     public var body: some View {
@@ -160,8 +160,16 @@ public struct VeoSidebar: View {
         let backgroundColor: Color
         let selectedColor: Color
         let textColor: Color
-        
-        public init(topLogo: String, headerText: String, bottomLogo: String?, width: CGFloat, backgroundColor: Color, selectedColor: Color, textColor: Color) {
+
+        public init(
+            topLogo: String,
+            headerText: String,
+            bottomLogo: String?,
+            width: CGFloat,
+            backgroundColor: Color,
+            selectedColor: Color,
+            textColor: Color)
+        {
             self.topLogo = topLogo
             self.headerText = headerText
             self.bottomLogo = bottomLogo

@@ -12,7 +12,7 @@ public struct VeoBottomTabBar: View {
         public let id = UUID()
         let icon: String
         let title: String
-        
+
         public init(icon: String, title: String) {
             self.icon = icon
             self.title = title

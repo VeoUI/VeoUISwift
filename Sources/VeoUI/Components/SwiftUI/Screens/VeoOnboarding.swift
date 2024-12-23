@@ -13,7 +13,7 @@ public struct VeoOnboarding: View {
         let title: String
         let description: String
         let image: String
-        
+
         public init(title: String, description: String, image: String) {
             self.title = title
             self.description = description

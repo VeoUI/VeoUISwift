@@ -10,7 +10,7 @@ import SwiftUI
 public struct VeoLoader: View {
     @State private var isVisible = true
     @State private var dotAnimations = [false, false, false]
-    
+
     public init(isVisible: Bool = true, dotAnimations: [Bool] = [false, false, false]) {
         self.isVisible = isVisible
         self.dotAnimations = dotAnimations
