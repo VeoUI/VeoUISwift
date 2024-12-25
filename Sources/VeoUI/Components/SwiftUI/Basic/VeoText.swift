@@ -14,14 +14,14 @@ public struct VeoText: View {
     var lineLimit: Int?
     var color: Color?
 
-    enum VeoTextStyle {
+    public enum VeoTextStyle {
         case title
         case subtitle
         case body
         case caption
     }
 
-    init(
+    public init(
         _ text: String,
         style: VeoTextStyle = .body,
         alignment: TextAlignment = .leading,

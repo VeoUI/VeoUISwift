@@ -17,6 +17,20 @@ public struct VeoCheckBox: View {
     private let size: CGFloat = 24
     private let innerPadding: CGFloat = 6
 
+    public init(
+        title: String,
+        isChecked: Bool,
+        action: @escaping () -> Void,
+        tintColor: Color = VeoUI.primaryColor,
+        isEnabled: Bool = true)
+    {
+        self.title = title
+        self.isChecked = isChecked
+        self.action = action
+        self.tintColor = tintColor
+        self.isEnabled = isEnabled
+    }
+
     public var body: some View {
         Button(action: {
             if isEnabled {

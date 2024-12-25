@@ -15,7 +15,7 @@ public struct VeoBadge: View {
     let cornerRadius: CGFloat
     let isRightToLeft: Bool
 
-    init(
+    public init(
         text: String,
         textColor: Color = .white,
         horizontalPadding: CGFloat = 8,

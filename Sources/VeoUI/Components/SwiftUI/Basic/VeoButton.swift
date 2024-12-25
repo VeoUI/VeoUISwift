@@ -18,7 +18,7 @@ public struct VeoButton: View {
     let textDirection: TextAlignment
     let isEnabled: Bool
 
-    init(
+    public init(
         title: String,
         style: VeoButtonStyle = .primary,
         shape: VeoButtonShape = .rounded,

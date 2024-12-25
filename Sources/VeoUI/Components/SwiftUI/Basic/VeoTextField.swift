@@ -20,6 +20,26 @@ public struct VeoTextField: View {
     @State private var isEditing = false
     @State private var isValid = true
 
+    public init(
+        text: Binding<String>,
+        icon: String,
+        placeholder: String,
+        isSecure: Bool = false,
+        keyboardType: UIKeyboardType = .default,
+        validation: ((String) -> Bool)? = nil,
+        onEditingChanged: ((Bool) -> Void)? = nil,
+        onCommit: (() -> Void)? = nil)
+    {
+        _text = text
+        self.icon = icon
+        self.placeholder = placeholder
+        self.isSecure = isSecure
+        self.keyboardType = keyboardType
+        self.validation = validation
+        self.onEditingChanged = onEditingChanged
+        self.onCommit = onCommit
+    }
+
     public var body: some View {
         VStack(alignment: .leading) {
             HStack {
