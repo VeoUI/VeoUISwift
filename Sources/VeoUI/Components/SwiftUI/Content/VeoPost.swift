@@ -155,7 +155,7 @@ public struct VeoPost: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 12) {
-                Image(data.userAvatar, bundle: .module)
+                Image(data.userAvatar)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 48, height: 48)

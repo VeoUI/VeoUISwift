@@ -8,20 +8,71 @@
 import SwiftUI
 
 public struct VeoImage: View {
-    let url: String
-    var placeholder = "photo"
-    var contentMode: ContentMode = .fill
-    var cornerRadius: CGFloat = 8
-    var showLoadingIndicator = true
-    var tintColor: Color = .gray
-    var maxWidth: CGFloat? = nil
-    var maxHeight: CGFloat? = nil
-    var minWidth: CGFloat? = nil
-    var minHeight: CGFloat? = nil
+    private let name: String?
+    private let url: String?
+    private var placeholder: String
+    private var contentMode: ContentMode
+    private var cornerRadius: CGFloat
+    private var showLoadingIndicator: Bool
+    private var tintColor: Color
+    private var maxWidth: CGFloat?
+    private var maxHeight: CGFloat?
+    private var minWidth: CGFloat?
+    private var minHeight: CGFloat?
 
     @State private var image: UIImage?
     @State private var isLoading = true
     @State private var hasError = false
+
+    public init(
+        name: String,
+        placeholder: String = "photo",
+        contentMode: ContentMode = .fill,
+        cornerRadius: CGFloat = 8,
+        showLoadingIndicator: Bool = true,
+        tintColor: Color = .gray,
+        maxWidth: CGFloat? = nil,
+        maxHeight: CGFloat? = nil,
+        minWidth: CGFloat? = nil,
+        minHeight: CGFloat? = nil
+    ) {
+        self.name = name
+        self.url = nil
+        self.placeholder = placeholder
+        self.contentMode = contentMode
+        self.cornerRadius = cornerRadius
+        self.showLoadingIndicator = showLoadingIndicator
+        self.tintColor = tintColor
+        self.maxWidth = maxWidth
+        self.maxHeight = maxHeight
+        self.minWidth = minWidth
+        self.minHeight = minHeight
+    }
+
+    public init(
+        url: String?,
+        placeholder: String = "photo",
+        contentMode: ContentMode = .fill,
+        cornerRadius: CGFloat = 8,
+        showLoadingIndicator: Bool = true,
+        tintColor: Color = .gray,
+        maxWidth: CGFloat? = nil,
+        maxHeight: CGFloat? = nil,
+        minWidth: CGFloat? = nil,
+        minHeight: CGFloat? = nil
+    ) {
+        self.name = nil
+        self.url = url
+        self.placeholder = placeholder
+        self.contentMode = contentMode
+        self.cornerRadius = cornerRadius
+        self.showLoadingIndicator = showLoadingIndicator
+        self.tintColor = tintColor
+        self.maxWidth = maxWidth
+        self.maxHeight = maxHeight
+        self.minWidth = minWidth
+        self.minHeight = minHeight
+    }
 
     public var body: some View {
         ZStack {
@@ -100,25 +151,37 @@ public struct VeoImage: View {
     }
 
     private func loadImage() {
-        guard let imageUrl = URL(string: url) else {
-            hasError = true
-            isLoading = false
-            return
-        }
-
-        URLSession.shared.dataTask(with: imageUrl) { data, _, _ in
-            DispatchQueue.main.async {
-                if let data = data, let loadedImage = UIImage(data: data) {
-                    withAnimation {
-                        image = loadedImage
-                        isLoading = false
-                    }
-                } else {
-                    hasError = true
+        if let name = name {
+            if let loadedImage = UIImage(named: name) {
+                withAnimation {
+                    image = loadedImage
                     isLoading = false
                 }
+            } else {
+                hasError = true
+                isLoading = false
             }
-        }.resume()
+        } else if let url = url {
+            guard let imageUrl = URL(string: url) else {
+                hasError = true
+                isLoading = false
+                return
+            }
+
+            URLSession.shared.dataTask(with: imageUrl) { data, _, _ in
+                DispatchQueue.main.async {
+                    if let data = data, let loadedImage = UIImage(data: data) {
+                        withAnimation {
+                            image = loadedImage
+                            isLoading = false
+                        }
+                    } else {
+                        hasError = true
+                        isLoading = false
+                    }
+                }
+            }.resume()
+        }
     }
 }
 
@@ -139,6 +202,12 @@ public struct VeoImage: View {
                 VStack(spacing: 32) {
                     Group {
                         Text("Basic Image").font(.headline)
+                        
+                        VeoImage(
+                            name: "logo",
+                            maxWidth: 400,
+                            maxHeight: 300)
+                        
                         VeoImage(
                             url: validImageUrl,
                             maxWidth: 400,

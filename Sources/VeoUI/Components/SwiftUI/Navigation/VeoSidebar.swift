@@ -71,7 +71,7 @@ public struct VeoSidebar: View {
                 .edgesIgnoringSafeArea(.vertical)
 
             VStack(spacing: 20) {
-                Image(config.topLogo, bundle: .module)
+                Image(config.topLogo)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -91,7 +91,7 @@ public struct VeoSidebar: View {
                 Spacer()
 
                 if let bottomLogo = config.bottomLogo {
-                    Image(bottomLogo, bundle: .module)
+                    Image(bottomLogo)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 60, height: 60)

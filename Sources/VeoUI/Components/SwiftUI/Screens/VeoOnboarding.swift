@@ -143,7 +143,7 @@ public struct VeoOnboarding: View {
 
     private var pageView: some View {
         VStack(spacing: 20) {
-            Image(currentItem.image, bundle: .module)
+            Image(currentItem.image)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 260)

@@ -17,7 +17,7 @@ public struct VeoLogin: View {
 
     var appName: String
     var appIcon: VeoIcon?
-    var appLogo: VeoImage?
+    var appLogo: String?
     var title = "Login"
     var emailPlaceholder = "Your Email"
     var passwordPlaceholder = "Your Password"
@@ -34,7 +34,7 @@ public struct VeoLogin: View {
     public init(
         appName: String,
         appIcon: VeoIcon? = nil,
-        appLogo: VeoImage? = nil,
+        appLogo: String? = nil,
         title: String,
         emailPlaceholder: String,
         passwordPlaceholder: String,
@@ -80,7 +80,9 @@ public struct VeoLogin: View {
                 }
 
                 if let appLogo = appLogo {
-                    appLogo
+                    VeoImage(name: appLogo,
+                             maxWidth: 120,
+                             maxHeight: 120)
                 }
 
                 VeoText(appName, style: .title, color: .white)
@@ -175,10 +177,7 @@ public struct VeoLogin: View {
         var body: some View {
             VeoLogin(
                 appName: "تدويناتي",
-                appIcon: VeoIcon(
-                    icon: .common(.user),
-                    size: 120,
-                    color: .white),
+                appLogo: "logo",
                 title: "تسجيل الدخول",
                 emailPlaceholder: "البريد الإلكتروني",
                 passwordPlaceholder: "كلمة المرور",
