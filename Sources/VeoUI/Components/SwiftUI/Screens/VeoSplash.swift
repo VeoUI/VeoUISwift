@@ -75,12 +75,15 @@ public struct VeoSplash: View {
 
             VStack(spacing: spacing) {
                 if let appLogo = appLogo {
-                    VeoImage(name: appLogo,
-                             maxWidth: 120,
-                             maxHeight: 120)
+                    VeoImage(
+                        name: appLogo,
+                        maxWidth: 120,
+                        maxHeight: 120)
                 } else {
-                    if let iconName = iconName,
-                       let iconSize = iconSize{
+                    if
+                        let iconName = iconName,
+                        let iconSize = iconSize
+                    {
                         Image(systemName: iconName)
                             .resizable()
                             .aspectRatio(contentMode: .fit)

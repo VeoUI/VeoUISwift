@@ -15,10 +15,20 @@ public struct VeoText: View {
     var color: Color?
 
     public enum VeoTextStyle {
+        case largeTitle
+        case title1
+        case title2
+        case title3
         case title
         case subtitle
+        case headline
+        case subheadline
         case body
+        case callout
+        case caption1
+        case caption2
         case caption
+        case footnote
     }
 
     public init(
@@ -45,6 +55,26 @@ public struct VeoText: View {
             VeoFont.body()
         case .caption:
             VeoFont.caption1()
+        case .largeTitle:
+            VeoFont.largeTitle()
+        case .title1:
+            VeoFont.title1()
+        case .title2:
+            VeoFont.title2()
+        case .title3:
+            VeoFont.title3()
+        case .headline:
+            VeoFont.headline()
+        case .subheadline:
+            VeoFont.subheadline()
+        case .callout:
+            VeoFont.callout()
+        case .caption1:
+            VeoFont.caption1()
+        case .caption2:
+            VeoFont.caption2()
+        case .footnote:
+            VeoFont.footnote()
         }
     }
 

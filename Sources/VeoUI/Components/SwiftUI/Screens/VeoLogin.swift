@@ -80,9 +80,10 @@ public struct VeoLogin: View {
                 }
 
                 if let appLogo = appLogo {
-                    VeoImage(name: appLogo,
-                             maxWidth: 120,
-                             maxHeight: 120)
+                    VeoImage(
+                        name: appLogo,
+                        maxWidth: 120,
+                        maxHeight: 120)
                 }
 
                 VeoText(appName, style: .title, color: .white)

@@ -34,10 +34,10 @@ public struct VeoImage: View {
         maxWidth: CGFloat? = nil,
         maxHeight: CGFloat? = nil,
         minWidth: CGFloat? = nil,
-        minHeight: CGFloat? = nil
-    ) {
+        minHeight: CGFloat? = nil)
+    {
         self.name = name
-        self.url = nil
+        url = nil
         self.placeholder = placeholder
         self.contentMode = contentMode
         self.cornerRadius = cornerRadius
@@ -59,9 +59,9 @@ public struct VeoImage: View {
         maxWidth: CGFloat? = nil,
         maxHeight: CGFloat? = nil,
         minWidth: CGFloat? = nil,
-        minHeight: CGFloat? = nil
-    ) {
-        self.name = nil
+        minHeight: CGFloat? = nil)
+    {
+        name = nil
         self.url = url
         self.placeholder = placeholder
         self.contentMode = contentMode
@@ -202,12 +202,12 @@ public struct VeoImage: View {
                 VStack(spacing: 32) {
                     Group {
                         Text("Basic Image").font(.headline)
-                        
+
                         VeoImage(
                             name: "logo",
                             maxWidth: 400,
                             maxHeight: 300)
-                        
+
                         VeoImage(
                             url: validImageUrl,
                             maxWidth: 400,
