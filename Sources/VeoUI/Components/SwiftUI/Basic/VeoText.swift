@@ -13,6 +13,7 @@ public struct VeoText: View {
     var alignment: TextAlignment = .leading
     var lineLimit: Int?
     var color: Color?
+    var lineSpacing: CGFloat?
 
     public enum VeoTextStyle {
         case largeTitle
@@ -36,13 +37,15 @@ public struct VeoText: View {
         style: VeoTextStyle = .body,
         alignment: TextAlignment = .leading,
         lineLimit: Int? = nil,
-        color: Color? = nil)
+        color: Color? = nil,
+        lineSpacing: CGFloat? = nil)
     {
         self.text = text
         self.style = style
         self.alignment = alignment
         self.lineLimit = lineLimit
         self.color = color
+        self.lineSpacing = lineSpacing
     }
 
     private var font: Font {
@@ -84,6 +87,7 @@ public struct VeoText: View {
             .foregroundColor(color ?? (VeoUI.isDarkMode ? .white : .black))
             .multilineTextAlignment(alignment)
             .lineLimit(lineLimit)
+            .lineSpacing(lineSpacing ?? 0)
     }
 }
 

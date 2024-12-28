@@ -37,7 +37,7 @@ public enum VeoFont {
             case .subheadline:
                 15
             case .body:
-                14
+                16
             case .callout:
                 16
             case .caption1:
