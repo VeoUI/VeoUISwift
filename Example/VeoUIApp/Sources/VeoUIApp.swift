@@ -11,6 +11,11 @@ import VeoUI
 @main
 struct VeoUIApp: App {
     init() {
+        
+        NetworkInterceptor.setupDefaultMocks()
+        NetworkInterceptor.register()
+        URLSession.configureForMocking()
+        
         VeoUI.configure(
             primaryColor: Color(hex: "#f53d1b"),
             primaryDarkColor: Color(hex: "#c6062e"),

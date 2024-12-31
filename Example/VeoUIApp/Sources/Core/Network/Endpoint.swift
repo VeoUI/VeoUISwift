@@ -17,7 +17,7 @@ struct Endpoint {
     var url: URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "jsonplaceholder.typicode.com"
+        components.host = "api.test/api/v1"
         components.path = path
         components.queryItems = queryItems
 

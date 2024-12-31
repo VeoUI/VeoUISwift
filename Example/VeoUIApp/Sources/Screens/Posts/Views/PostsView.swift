@@ -115,13 +115,23 @@ struct PostsView: View {
                                 cornerRadius: 25,
                                 padding: EdgeInsets(top: 12, leading: 32, bottom: 12, trailing: 32)), action: {})))
             }
-        }
-        .alert("Error", isPresented: .constant(viewModel.error != nil)) {
-            Button("Retry") {
-                viewModel.fetchPosts()
+            
+            if viewModel.error != nil {
+                VeoAlert(
+                    isPresented: $viewModel.showLogoutAlert,
+                    content: VeoAlert.AlertContent(
+                        icon: .system(
+                            name: "xmark",
+                            color: VeoUI.dangerColor,
+                            backgroundColor: Color.red.opacity(0.1)),
+                        title: "Error",
+                        message: viewModel.error?.localizedDescription ?? "",
+                        primaryButton: VeoAlert.AlertButton(
+                            title: "Retry",
+                            style: .primary, action: {
+                                viewModel.fetchPosts()
+                            })))
             }
-        } message: {
-            Text(viewModel.error?.localizedDescription ?? "")
         }
         .ignoresSafeArea(.container, edges: .bottom)
         .onAppear {

@@ -12,7 +12,7 @@ protocol PostsServiceProtocol {
 }
 
 final class PostsService: PostsServiceProtocol {
-    private let baseURL = "https://jsonplaceholder.typicode.com"
+    private let baseURL = "https://api.test/api/v1"
 
     func fetchPosts() async throws -> [Post] {
         guard let url = URL(string: "\(baseURL)/posts") else {
