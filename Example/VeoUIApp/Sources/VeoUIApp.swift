@@ -12,9 +12,9 @@ import VeoUI
 struct VeoUIApp: App {
     init() {
         VeoUI.configure(
-            primaryColor: Color(hex: "#27ae60"),
-            primaryDarkColor: Color(hex: "#2ecc71"),
-            mainFont: "Nunito-Medium")
+            primaryColor: Color(hex: "#f53d1b"),
+            primaryDarkColor: Color(hex: "#c6062e"),
+            mainFont: "BalsamiqSans-Bold")
     }
 
     var body: some Scene {

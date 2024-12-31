@@ -79,8 +79,8 @@ public struct VeoTextField: View {
             .clipShape(RoundedRectangle(cornerRadius: 30))
 
             if !isValid {
-                Text("Invalid input")
-                    .font(VeoFont.caption1())
+                VeoText("Invalid input",
+                        color: VeoUI.dangerColor)
                     .foregroundColor(Color.red)
                     .padding(.leading, 24)
             }

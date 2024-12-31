@@ -24,12 +24,15 @@ public struct VeoLogin: View {
     var loginButtonTitle = "Login"
     var forgotPasswordButtonTitle = "Forgot Password ?"
     var dontHaveAccountButtonTitle = "Don't have an account? Register Now !"
+    var showToast: Bool = false
+    var pleaseFillInAllFieldsToastMessage = "Please fill in all fields !"
 
     var onLoginTapped: ((_ email: String, _ password: String) async throws -> Void)?
     var onRegisterTapped: (() -> Void)?
     var onForgotPasswordTapped: (() -> Void)?
     var onLoginSuccess: (() -> Void)?
     var onLoginError: ((Error) -> Void)?
+    @State private var currentToast: VeoToastMessage?
 
     public init(
         appName: String,
@@ -41,6 +44,8 @@ public struct VeoLogin: View {
         loginButtonTitle: String,
         forgotPasswordButtonTitle: String,
         dontHaveAccountButtonTitle: String,
+        showToast: Bool = false,
+        pleaseFillInAllFieldsToastMessage: String = "Please fill in all fields !",
         onLoginTapped: ((_ email: String, _ password: String) async throws -> Void)? = nil,
         onRegisterTapped: (() -> Void)? = nil,
         onForgotPasswordTapped: (() -> Void)? = nil,
@@ -56,6 +61,8 @@ public struct VeoLogin: View {
         self.loginButtonTitle = loginButtonTitle
         self.forgotPasswordButtonTitle = forgotPasswordButtonTitle
         self.dontHaveAccountButtonTitle = dontHaveAccountButtonTitle
+        self.showToast = showToast
+        self.pleaseFillInAllFieldsToastMessage = pleaseFillInAllFieldsToastMessage
         self.onLoginTapped = onLoginTapped
         self.onRegisterTapped = onRegisterTapped
         self.onForgotPasswordTapped = onForgotPasswordTapped
@@ -88,7 +95,7 @@ public struct VeoLogin: View {
 
                 VeoText(appName, style: .title, color: .white)
 
-                VeoText(title, style: .subtitle, color: .white)
+                VeoText(title, style: .title2, color: .white)
                     .padding(.top, 20)
 
                 VStack(spacing: 20) {
@@ -111,7 +118,8 @@ public struct VeoLogin: View {
                     }
                     .padding(.top, -10)
 
-                    VeoButton(title: loginButtonTitle, action: handleLogin)
+                    VeoButton(title: loginButtonTitle,
+                              gradientColors: (VeoUI.primaryColor, VeoUI.primaryDarkColor), action: handleLogin)
                         .disabled(isLoading)
 
                     Button(action: handleRegister) {
@@ -126,6 +134,10 @@ public struct VeoLogin: View {
             }
             .padding(20)
 
+            if showToast {
+                VeoToast(currentToast: $currentToast)
+            }
+            
             if isLoading {
                 VeoLoader()
             }
@@ -134,7 +146,14 @@ public struct VeoLogin: View {
     }
 
     private func handleLogin() {
-        guard !email.isEmpty, !password.isEmpty else { return }
+        guard !email.isEmpty, !password.isEmpty else {
+            currentToast = VeoToastMessage(
+                message: pleaseFillInAllFieldsToastMessage,
+                style: .warning,
+                position: .bottom
+            )
+            return
+        }
 
         withAnimation {
             isLoading = true
@@ -151,6 +170,11 @@ public struct VeoLogin: View {
                 await MainActor.run {
                     isLoading = false
                     onLoginError?(error)
+                    currentToast = VeoToastMessage(
+                        message: error.localizedDescription,
+                        style: .error,
+                        position: .bottom
+                    )
                 }
             }
         }
@@ -172,7 +196,7 @@ public struct VeoLogin: View {
         primaryColor: Color(hex: "#e74c3c"),
         primaryDarkColor: Color(hex: "#c0392b"),
         isRTL: true,
-        mainFont: "Tajawal-Bold")
+        mainFont: "Rubik-Bold")
 
     struct VeoLoginPreview: View {
         var body: some View {
@@ -185,6 +209,8 @@ public struct VeoLogin: View {
                 loginButtonTitle: "دخول",
                 forgotPasswordButtonTitle: "نسيت كلمة المرور ؟",
                 dontHaveAccountButtonTitle: "ليس لديك حساب ؟ أنشئه الآن",
+                showToast: true,
+                pleaseFillInAllFieldsToastMessage: "يرجى ملء جميع الحقول المطلوبة !",
                 onLoginTapped: { email, password in
                     print("Login tapped with email: \(email) and password: \(password)")
                     try await Task.sleep(nanoseconds: 2_000_000_000)

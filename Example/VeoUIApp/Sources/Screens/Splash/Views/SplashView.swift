@@ -14,8 +14,8 @@ struct SplashView: View {
     var body: some View {
         if isSplash {
             VeoSplash(
-                title: "My Posts",
-                iconName: "book")
+                title: "VeoUI App",
+                appLogo: "logo")
                 .onAppear {
                     startSplashTimer()
                 }

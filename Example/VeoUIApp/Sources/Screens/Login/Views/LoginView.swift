@@ -16,11 +16,8 @@ struct LoginView: View {
             PostsView()
         } else {
             VeoLogin(
-                appName: "My Posts",
-                appIcon: VeoIcon(
-                    icon: .common(.user),
-                    size: 120,
-                    color: .white),
+                appName: "VeoUI App",
+                appLogo: "logo",
                 title: "Sign In",
                 emailPlaceholder: "Your email",
                 passwordPlaceholder: "Your Password",

@@ -113,6 +113,7 @@ extension VeoIcon {
         case settings = "gear"
         case user = "person.circle"
         case calendar
+        case close = "xmark"
     }
 
     static func common(_ icon: CommonIcons, size: CGFloat = 24) -> VeoIcon {
