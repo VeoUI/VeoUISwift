@@ -24,6 +24,8 @@ struct LoginView: View {
                 loginButtonTitle: "Login",
                 forgotPasswordButtonTitle: "You forgot your password ?",
                 dontHaveAccountButtonTitle: "You don't have an account ? Create one now !",
+                showToast: true,
+                pleaseFillInAllFieldsToastMessage: "Please fill in all fields !",
                 onLoginTapped: { email, password in
                     print("Login tapped with email: \(email) and password: \(password)")
                     try await Task.sleep(nanoseconds: 4_000_000_000)
