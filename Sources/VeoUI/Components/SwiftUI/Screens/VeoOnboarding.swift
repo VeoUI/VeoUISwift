@@ -96,6 +96,10 @@ public struct VeoOnboarding: View {
 
     public var body: some View {
         ZStack {
+            VeoUI.primaryColor
+                .opacity(0.05)
+                .ignoresSafeArea()
+            
             if navigationStyle != .button {
                 TabView(selection: $currentPage) {
                     ForEach(0 ..< items.count, id: \.self) { index in
