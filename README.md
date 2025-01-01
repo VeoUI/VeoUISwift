@@ -3,7 +3,17 @@
 > A comprehensive, customizable, and production-ready SwiftUI components library designed for building modern applications with ease
 
 ![](https://img.shields.io/badge/license-Apache--2.0-blue)
-![](https://img.shields.io/badge/version-0.9.0-green)
+![](https://img.shields.io/badge/version-0.9.1-green)
+
+## Features
+
+- 🎨 **40+ Pre-built Components**
+- 📱 **Fully SwiftUI Native**
+- 🔧 **Highly Customizable**
+- ♿️ **Accessibility First**
+- 🌍 **RTL Support**
+- 📦 **Swift Package Manager**
+- 🎯 **iOS 15+**
 
 ## Installation
 
@@ -19,9 +29,13 @@ Or add it to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/VeoUI/VeoUISwift.git", from: "0.9.0")
+    .package(url: "https://github.com/VeoUI/VeoUISwift.git", from: "0.9.1")
 ]
 ```
+
+## Example App
+
+Check out the [Example](Example) directory for a fully functional demo app showcasing all components and features.
 
 ## Configuration
 
@@ -77,11 +91,102 @@ struct ContentView: View {
 
 ## Components
 
-### VeoText
+### Screens
+
+#### VeoSplash
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Screenshot (LTR)</th>
+<th>Screenshot (RTL)</th>
+</tr>
+</thead>
+<tr>
+<td width="33%">
+
+```swift
+import SwiftUI
+import VeoUI
+
+struct SplashView: View {
+    @State private var isSplash = true
+
+    var body: some View {
+        if isSplash {
+            VeoSplash(
+     title: "VeoUI App",
+     appLogo: "logo")
+     .onAppear {
+         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+             isSplash = false
+         }
+     }
+        } else {
+            OnboardingView()
+        }
+    }
+}
+```
+</td>
+<td width="33%">
+<img src="Screenshots/Screenshot1.png">
+</td>
+<td width="33%">
+<img src="Screenshots/Screenshot2.png">
+</td>
+</tr>
+</table>
+
+#### VeoLogin
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Screenshot (LTR)</th>
+<th>Screenshot (RTL)</th>
+</tr>
+</thead>
+<tr>
+<td width="33%">
+
+```swift
+VeoLogin(
+     appName: "VeoUI App",
+     appLogo: "logo",
+     title: "Sign In",
+     emailPlaceholder: "Your email",
+     passwordPlaceholder: "Your Password",
+     loginButtonTitle: "Login",
+     forgotPasswordButtonTitle: "You forgot your password ?",
+     dontHaveAccountButtonTitle: "You don't have an account ? Create one now !",
+     showToast: true,
+     pleaseFillInAllFieldsToastMessage: "Please fill in all fields !",
+     onLoginTapped: { email, password in },
+     onRegisterTapped: { },
+     onForgotPasswordTapped: { },
+     onLoginSuccess: { },
+     onLoginError: { error in })
+```
+</td>
+<td width="33%">
+<img src="Screenshots/Screenshot3.png">
+</td>
+<td width="33%">
+<img src="Screenshots/Screenshot4.png">
+</td>
+</tr>
+</table>
+
+### Data Display
+
+#### VeoText
 
 ```swift
 VeoText("Login", style: .subtitle, color: .white)
 ```
+
+### Buttons
 
 ### VeoButton
 
