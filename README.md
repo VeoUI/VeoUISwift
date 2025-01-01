@@ -5,6 +5,10 @@
 ![](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![](https://img.shields.io/badge/version-0.9.1-green)
 
+<div align="center">
+    <img src="logo.png" width="300" height="300">
+</div>
+
 ## Features
 
 - 🎨 **40+ Pre-built Components**
@@ -94,6 +98,7 @@ struct ContentView: View {
 ### Screens
 
 #### VeoSplash
+
 <table>
 <thead>
 <tr>
@@ -142,7 +147,60 @@ struct SplashView: View {
 </tr>
 </table>
 
+#### VeoOnboarding
+
+<table>
+<thead>
+<tr>
+<th colspan="2">Code</th>
+</tr>
+</thead>
+<tr>
+<td colspan="2">
+
+```swift
+VeoOnboarding(
+      items: [
+      .init(
+          title: "This is the first onboarding item title",
+          description: "This is a long description for the first onboarding item to describe it in more detail!",
+          image: "onboarding1"),
+      .init(
+          title: "This is the second onboarding item title",
+          description: "This is a long description for the second onboarding item to describe it in more detail!",
+          image: "onboarding2"),
+      .init(
+          title: "This is the third onboarding item title",
+          description: "This is a long description for the third onboarding item to describe it in more detail!",
+          image: "onboarding3"),
+      .init(
+          title: "This is the fourth onboarding item title",
+          description: "This is a long description for the fourth onboarding item to describe it in more detail!",
+          image: "onboarding4")
+      ],
+      skipButtonText: "Skip",
+      nextButtonText: "Next",
+      getStartedButtonText: "Start Now",
+      onFinish: { })
+```
+</td>
+</tr>
+<tr>
+<th>Screenshot (LTR)</th>
+<th>Screenshot (RTL)</th>
+</tr>
+<tr>
+<td>
+<img src="Screenshots/Screenshot5.png">
+</td>
+<td>
+<img src="Screenshots/Screenshot6.png">
+</td>
+</tr>
+</table>
+
 #### VeoLogin
+
 <table>
 <thead>
 <tr>
@@ -182,6 +240,99 @@ VeoLogin(
 </td>
 <td>
 <img src="Screenshots/Screenshot4.png">
+</td>
+</tr>
+</table>
+
+#### VeoRegister
+
+<table>
+<thead>
+<tr>
+<th colspan="2">Code</th>
+</tr>
+</thead>
+<tr>
+<td colspan="2">
+
+```swift
+VeoRegister(
+            appName: "App Name",
+            appLogo: "logo",
+            title: "Create Account",
+            fullNamePlaceholder: "Full Name",
+            emailPlaceholder: "Email",
+            passwordPlaceholder: "Password",
+            confirmPasswordPlaceholder: "Confirm Password",
+            registerButtonTitle: "Register",
+            alreadyHaveAccountButtonTitle: "Already have an account? Login now",
+            showToast: true,
+            pleaseFillInAllFieldsToastMessage: "Please fill in all required fields!",
+            passwordsDontMatchMessage: "Passwords don't match!",
+            onRegisterTapped: { fullName, email, password in },
+            onLoginTapped: { },
+            onRegisterSuccess: { },
+            onRegisterError: { error in }
+        )
+        .navigationBarBackButtonHidden(true)
+```
+</td>
+</tr>
+<tr>
+<th>Screenshot (LTR)</th>
+<th>Screenshot (RTL)</th>
+</tr>
+<tr>
+<td>
+<img src="Screenshots/Screenshot7.png">
+</td>
+<td>
+<img src="Screenshots/Screenshot8.png">
+</td>
+</tr>
+</table>
+
+#### VeoResetPassword
+
+<table>
+<thead>
+<tr>
+<th colspan="2">Code</th>
+</tr>
+</thead>
+<tr>
+<td colspan="2">
+
+```swift
+VeoResetPassword(
+            appName: "App Name",
+            appLogo: "logo",
+            title: "Reset Password",
+            subtitle: "Enter your email and we'll send you a password reset link",
+            emailPlaceholder: "Email",
+            resetButtonTitle: "Send Reset Link",
+            backToLoginButtonTitle: "Back to Login",
+            showToast: true,
+            pleaseFillEmailMessage: "Please enter your email!",
+            onResetTapped: { email in },
+            onBackToLoginTapped: { },
+            onResetSuccess: { },
+            onResetError: { error in }
+        )
+        .navigationBarBackButtonHidden(true)
+```
+</td>
+</tr>
+<tr>
+<th>Screenshot (LTR)</th>
+<th>Screenshot (RTL)</th>
+</tr>
+<tr>
+<td>
+<img src="Screenshots/Screenshot9.png">
+</td>
+<td>
+<img src="Screenshots/Screenshot10.png">
 </td>
 </tr>
 </table>
