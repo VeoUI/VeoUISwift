@@ -9,12 +9,9 @@ import SwiftUI
 import VeoUI
 
 struct LoginView: View {
-    @State private var isLoggedIn = false
+    @EnvironmentObject var router: AppRouter
 
     var body: some View {
-        if isLoggedIn {
-            PostsView()
-        } else {
             VeoLogin(
                 appName: "VeoUI App",
                 appLogo: "logo",
@@ -31,20 +28,20 @@ struct LoginView: View {
                     try await Task.sleep(nanoseconds: 4_000_000_000)
                 },
                 onRegisterTapped: {
-                    print("Register tapped")
+                    router.navigateTo(.register)
                 },
                 onForgotPasswordTapped: {
-                    print("Forgot password tapped")
+                    router.navigateTo(.resetPassword)
                 },
                 onLoginSuccess: {
                     withAnimation {
-                        isLoggedIn = true
+                        router.navigateTo(.home)
                     }
                 },
                 onLoginError: { error in
                     print("Login error: \(error.localizedDescription)")
                 })
-        }
+            .navigationBarBackButtonHidden(true)
     }
 }
 

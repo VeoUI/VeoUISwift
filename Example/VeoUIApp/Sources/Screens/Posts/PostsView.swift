@@ -134,6 +134,7 @@ struct PostsView: View {
             }
         }
         .ignoresSafeArea(.container, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             viewModel.fetchPosts()
         }
