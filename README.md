@@ -97,13 +97,11 @@ struct ContentView: View {
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Screenshot (LTR)</th>
-<th>Screenshot (RTL)</th>
+<th colspan="2">Code</th>
 </tr>
 </thead>
 <tr>
-<td width="33%">
+<td colspan="2">
 
 ```swift
 import SwiftUI
@@ -129,10 +127,16 @@ struct SplashView: View {
 }
 ```
 </td>
-<td width="33%">
+</tr>
+<tr>
+<th>Screenshot (LTR)</th>
+<th>Screenshot (RTL)</th>
+</tr>
+<tr>
+<td>
 <img src="Screenshots/Screenshot1.png">
 </td>
-<td width="33%">
+<td>
 <img src="Screenshots/Screenshot2.png">
 </td>
 </tr>
@@ -142,13 +146,11 @@ struct SplashView: View {
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Screenshot (LTR)</th>
-<th>Screenshot (RTL)</th>
+<th colspan="2">Code</th>
 </tr>
 </thead>
 <tr>
-<td width="33%">
+<td colspan="2">
 
 ```swift
 VeoLogin(
@@ -169,10 +171,16 @@ VeoLogin(
      onLoginError: { error in })
 ```
 </td>
-<td width="33%">
+</tr>
+<tr>
+<th>Screenshot (LTR)</th>
+<th>Screenshot (RTL)</th>
+</tr>
+<tr>
+<td>
 <img src="Screenshots/Screenshot3.png">
 </td>
-<td width="33%">
+<td>
 <img src="Screenshots/Screenshot4.png">
 </td>
 </tr>
