@@ -114,7 +114,7 @@ public struct VeoOnboarding: View {
                     HStack {
                         Spacer()
                         Button(action: skipOnboarding) {
-                            VeoText(skipButtonTitle, style: .caption, color: VeoUI.primaryColor)
+                            VeoText(skipButtonTitle, style: .headline, color: VeoUI.primaryColor)
                         }
                         .padding()
                     }
@@ -126,7 +126,9 @@ public struct VeoOnboarding: View {
                     .padding(.bottom, 20)
 
                 if showNextButton {
-                    VeoButton(title: buttonTitle, action: nextPage)
+                    VeoButton(title: buttonTitle,
+                              gradientColors: (VeoUI.primaryColor, VeoUI.primaryDarkColor),
+                              action: nextPage)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                 }
@@ -157,7 +159,7 @@ public struct VeoOnboarding: View {
 
                 VeoText(
                     currentItem.description,
-                    style: .subtitle,
+                    style: .title2,
                     alignment: .center,
                     color: VeoUI.primaryColor)
             }
